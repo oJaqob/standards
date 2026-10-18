@@ -3,6 +3,10 @@
 Each release lists what a project must change when it updates. Versions follow
 Semantic Versioning; while on 0.x, a breaking change bumps the minor number.
 
+## Unreleased
+
+- `knip.base.json` is removed. Knip has no `extends`, and no project used it.
+
 ## v0.3.0
 
 Breaking: new lint errors.
