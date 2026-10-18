@@ -1,0 +1,50 @@
+{
+  "extends": ["config:best-practices", ":semanticCommitTypeAll(chore)"],
+  "timezone": "Europe/London",
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dependency Dashboard",
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 15,
+  "prHourlyLimit": 0,
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "deps",
+  "rebaseWhen": "behind-base-branch",
+  "prCreation": "not-pending",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security", "dependencies"],
+    "minimumReleaseAge": null
+  },
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "description": "Wait three days after a release before proposing it, so a hijacked or broken version is usually caught and pulled before it reaches main. Security fixes skip the wait (vulnerabilityAlerts). Longer than pnpm's own delay in pnpm-workspace.yaml, so an update Renovate merges always installs",
+      "matchPackageNames": ["*"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Automerge patch and minor updates (overridden below for the packages that stay manual)",
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "description": "Breaking and replacement updates open a pull request, created once CI has run, for review before merging",
+      "matchUpdateTypes": ["major", "replacement"],
+      "automerge": false
+    },
+    {
+      "description": "Keep Node.js versions synchronized, reviewed as a pull request: .node-version (the home), the engines field in package.json and @types/node",
+      "matchPackageNames": ["node", "@types/node"],
+      "groupName": "Node.js",
+      "automerge": false
+    },
+    {
+      "description": "Pinning and lockfile maintenance change no version anyone runs, so they always merge straight onto main once CI passes. Last, so it wins",
+      "matchUpdateTypes": ["pin", "pinDigest", "lockFileMaintenance"],
+      "automerge": true,
+      "automergeType": "branch",
+      "dependencyDashboardApproval": false
+    }
+  ]
+}
