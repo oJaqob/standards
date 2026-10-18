@@ -1,6 +1,6 @@
 # standards
 
-Shared configuration for the infra, drover and qalm projects. Public so they can install it without credentials.
+Shared Biome, TypeScript, Knip, Renovate and CI configuration for TypeScript projects. Public so projects can install it without credentials.
 
 Install, pinned to a tag so Renovate can propose upgrades:
 
