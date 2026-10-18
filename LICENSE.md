@@ -2,7 +2,7 @@
 
 Copyright (c) 2026 Jacob Oakley. All rights reserved.
 
-This source code and everything in this repository (the "Software") is proprietary and private.
+This source code and everything in this repository (the "Software") is proprietary. It is public only so the copyright holder's own projects can install it without credentials, which gives you no right to use it.
 
 You may not copy, modify, merge, publish, distribute, sublicense, sell or host the Software, or any part of it, without the prior written permission of the copyright holder.
 

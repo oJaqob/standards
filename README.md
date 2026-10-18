@@ -1,6 +1,6 @@
 # standards
 
-Shared configuration for Jacob's projects (infra, drover, qalm). Private.
+Shared configuration for Jacob's projects (infra, drover, qalm). Public so the projects can install it without credentials.
 
 Install, pinned to a tag so Renovate can propose upgrades:
 
