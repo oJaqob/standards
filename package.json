@@ -1,0 +1,17 @@
+{
+  "name": "@ojaqob/standards",
+  "version": "0.1.0",
+  "description": "Shared Biome, TypeScript, Knip, Renovate and CI configuration for Jacob's projects.",
+  "author": "Jacob Oakley <jacob@jacoboakley.uk>",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "files": [
+    "biome.json",
+    "tsconfig.*.json",
+    "knip.base.json",
+    "default.json"
+  ]
+}

@@ -1,0 +1,66 @@
+# The Gate job every project's CI starts with: skip a push to main whose commit
+# already passed on another branch (a Renovate branch fast-forwarded onto main
+# is the very same commit), and check everything else.
+#
+# Call it from a project's CI workflow:
+#
+#   gate:
+#     uses: oJaqob/standards/.github/workflows/gate.yml@v0.1.0
+#     permissions:
+#       actions: read
+#
+# and gate the other jobs on `needs.gate.outputs.run == 'true'`.
+name: Gate
+
+on:
+  workflow_call:
+    inputs:
+      runs-on:
+        description: JSON array of runner labels.
+        type: string
+        default: '["self-hosted","linux"]'
+    outputs:
+      run:
+        description: "'true' when the commit needs checking."
+        value: ${{ jobs.gate.outputs.run }}
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Gate
+    runs-on: ${{ fromJSON(inputs.runs-on) }}
+    permissions:
+      actions: read
+    outputs:
+      run: ${{ steps.decide.outputs.run }}
+    steps:
+      - id: decide
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const sha = context.sha;
+            const decide = (run, why) => {
+              core.info(why);
+              core.setOutput("run", String(run));
+            };
+
+            if (context.ref !== "refs/heads/main")
+              return decide(true, "Not main: checking.");
+
+            // A commit that already passed here on another branch - a
+            // Renovate branch fast-forwarded onto main is bit for bit the
+            // commit that passed on the branch. A merge commit is not: it
+            // holds a tree nothing has checked, so it falls through.
+            const { data: runs } = await github.rest.actions.listWorkflowRunsForRepo({
+              owner, repo, head_sha: sha, status: "success", per_page: 20
+            });
+            const passed = runs.workflow_runs.find(
+              run => run.name === context.workflow && run.id !== context.runId && run.head_branch !== "main"
+            );
+            if (passed)
+              return decide(false, `Already passed on ${passed.head_branch} (run ${passed.id}): skipping.`);
+
+            decide(true, "A tree main has not had checked: checking.");
