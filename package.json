@@ -1,6 +1,6 @@
 {
   "name": "@ojaqob/standards",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Shared Biome, TypeScript, Knip, Renovate and CI configuration for TypeScript projects.",
   "author": "Jacob Oakley <jacob@jacoboakley.uk>",
   "private": true,
