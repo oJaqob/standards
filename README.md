@@ -1,6 +1,6 @@
 # standards
 
-Shared Biome, TypeScript, Knip, Renovate and CI configuration for TypeScript projects. Public so projects can install it without credentials.
+Shared Biome, TypeScript, Renovate and CI configuration for TypeScript projects. Public so projects can install it without credentials.
 
 Install, pinned to a tag so Renovate can propose upgrades:
 
@@ -12,7 +12,6 @@ pnpm add -D github:oJaqob/standards#v0.3.0
 | --- | --- |
 | Biome | `biome.json`: `{ "extends": ["@ojaqob/standards/biome.json"] }` plus its own `files` and rule overrides |
 | TypeScript | `tsconfig.json`: `{ "extends": "@ojaqob/standards/tsconfig.node.json" }` or `tsconfig.bundler.json`; `tsconfig.strict.json` is the shared base |
-| Knip | `knip.json`: keep the workspaces and entry points local; `knip.base.json` holds the shared ignores |
 | Renovate | `renovate.json`: `"extends": ["github>oJaqob/standards"]` (`default.json`); project rules go after it |
 | CI | `uses: oJaqob/standards/.github/workflows/gate.yml@v0.3.0` for the Gate job |
 
