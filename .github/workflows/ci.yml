@@ -1,0 +1,33 @@
+# Checks the shared configuration itself: Biome lints this repo's own files,
+# and each tsconfig preset compiles a trivial file under check/. A preset that
+# no longer parses fails here, not in the projects that install the next tag.
+# Not part of gate.yml, so it adds nothing to a project's CI.
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+        with:
+          install: false
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit
+      - run: pnpm check

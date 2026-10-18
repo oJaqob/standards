@@ -5,7 +5,7 @@
 # Call it from a project's CI workflow:
 #
 #   gate:
-#     uses: oJaqob/standards/.github/workflows/gate.yml@v0.1.0
+#     uses: oJaqob/standards/.github/workflows/gate.yml@v0.3.0
 #     permissions:
 #       actions: read
 #
