@@ -15,7 +15,31 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "security": {
+        "noGlobalEval": "error"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error",
+        "noUnusedLabels": "error",
+        "noEmptyPattern": "off",
+        "noInnerDeclarations": "off"
+      },
+      "style": {
+        "useConst": "error",
+        "noProcessEnv": "error",
+        "useImportType": "error",
+        "noNonNullAssertion": "error",
+        "noNamespace": "off",
+        "useConsistentObjectDefinitions": "error"
+      },
+      "suspicious": {
+        "noDeprecatedImports": "error",
+        "noMisleadingCharacterClass": "off",
+        "useAwait": "error",
+        "noEmptyBlockStatements": "error"
+      }
     }
   },
   "javascript": {
@@ -34,5 +58,21 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.test.ts", "**/*.test.tsx", "**/vitest.setup.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noProcessEnv": "off"
+          },
+          "suspicious": {
+            "useAwait": "off",
+            "noEmptyBlockStatements": "off"
+          }
+        }
+      }
+    }
+  ]
 }
