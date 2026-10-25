@@ -14,7 +14,6 @@ pnpm add -D github:oJaqob/standards#v0.3.0
 | TypeScript | `tsconfig.json`: `{ "extends": "@ojaqob/standards/tsconfig.node.json" }` or `tsconfig.bundler.json`; `tsconfig.strict.json` is the shared base |
 | Renovate | `renovate.json`: `"extends": ["github>oJaqob/standards"]` (`default.json`); project rules go after it |
 | CI | `uses: oJaqob/standards/.github/workflows/gate.yml@v0.3.0` for the Gate job |
-
 | Agent skills | `pnpm dlx skills add oJaqob/standards -s apple-motion -a claude-code -y`: springs instead of timed animations, and Apple's rubber band (`skills/apple-motion`) |
 
 Not shared on purpose: the CI setup action (it differs per project), `SECURITY.md`,
