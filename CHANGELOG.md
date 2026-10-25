@@ -5,6 +5,7 @@ Semantic Versioning; while on 0.x, a breaking change bumps the minor number.
 
 ## Unreleased
 
+- Adds the `apple-motion` agent skill in `skills/`. Nothing to change in a project; install it with the command in the README.
 - `knip.base.json` is removed. Knip has no `extends`, and no project used it.
 
 ## v0.3.0
